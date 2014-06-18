@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+<div id="b-pps" style="display: none;">
+    <textarea rows="6" style="width: 400px;"></textarea><br>
+    <button>确定</button>
+</div>
+<div style="display: none;">
+    <form action="https://reg.163.com/logins.jsp" method="post" target="_self" id="form-login">
+        <input type="hidden" name="url" id="app-login-url">
+        <input type="text" name="username" id="glogin-uname">
+        <input type="password" name="password" id="glogin-pwd">
+    </form>
+</div>
+<script type="text/javascript" src="http://img4.cache.netease.com/3g/img13/dati/zepto.min.js"></script>
+<script>
+    var cardInfo = {"ES03":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/ES03.png","name":"大卫·席尔瓦","country":"西班牙","level":3},"ES04":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/ES04.png","name":"法布雷加斯","country":"西班牙","level":3},"ES05":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/ES05.png","name":"皮克","country":"西班牙","level":3},"ES01":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/ES01.png","name":"哈维","country":"西班牙","level":4},"ES02":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/ES02.png","name":"伊涅斯塔","country":"西班牙","level":5},"ES06":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/ES06.png","name":"拉莫斯","country":"西班牙","level":3},"ES07":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/ES07.png","name":"迭戈·科斯塔","country":"西班牙","level":2},"ES08":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/ES08.png","name":"卡西利亚斯","country":"西班牙","level":3},"BR03":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/BR03.png","name":"阿尔维斯","country":"巴西","level":3},"BR04":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/BR04.png","name":"马塞洛","country":"巴西","level":2},"BR01":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/BR01.png","name":"内马尔","country":"巴西","level":3},"BR02":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/BR02.png","name":"蒂亚戈·席尔瓦","country":"巴西","level":4},"BR05":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/BR05.png","name":"大卫·路易斯","country":"巴西","level":2},"BR06":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/BR06.png","name":"奥斯卡","country":"巴西","level":2},"BR07":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/BR07.png","name":"弗雷德","country":"巴西","level":1},"BR08":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/BR08.png","name":"塞萨尔","country":"巴西","level":1},"DE06":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/DE06.png","name":"罗伊斯","country":"德国","level":2},"DE03":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/DE03.png","name":"格策","country":"德国","level":3},"DE01":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/DE01.png","name":"厄齐尔","country":"德国","level":4},"DE02":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/DE02.png","name":"拉姆","country":"德国","level":4},"DE04":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/DE04.png","name":"施魏因斯泰格","country":"德国","level":3},"DE05":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/DE05.png","name":"穆勒","country":"德国","level":2},"DE07":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/DE07.png","name":"克洛泽","country":"德国","level":4},"DE08":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/DE08.png","name":"诺伊尔","country":"德国","level":3},"IT02":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/IT02.png","name":"巴洛特利","country":"意大利","level":3},"IT04":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/IT04.png","name":"基耶利尼","country":"意大利","level":3},"IT01":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/IT01.png","name":"皮尔洛","country":"意大利","level":4},"IT03":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/IT03.png","name":"马尔基西奥","country":"意大利","level":2},"IT05":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/IT05.png","name":"巴尔扎利","country":"意大利","level":2},"IT06":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/IT06.png","name":"德罗西","country":"意大利","level":2},"IT07":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/IT07.png","name":"蒙托利沃","country":"意大利","level":1},"IT08":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/IT08.png","name":"布冯","country":"意大利","level":4},"AR08":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/AR08.png","name":"萨巴莱塔","country":"阿根廷","level":1},"AR01":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/AR01.png","name":"梅西","country":"阿根廷","level":5},"AR02":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/AR02.png","name":"阿奎罗","country":"阿根廷","level":3},"AR03":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/AR03.png","name":"伊瓜因","country":"阿根廷","level":2},"AR04":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/AR04.png","name":"帕拉西奥","country":"阿根廷","level":1},"AR05":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/AR05.png","name":"拉维奇","country":"阿根廷","level":1},"AR06":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/AR06.png","name":"马斯切拉诺","country":"阿根廷","level":2},"AR07":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/AR07.png","name":"迪马利亚","country":"阿根廷","level":2},"UK07":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/UK07.png","name":"贝恩斯","country":"英格兰","level":1},"UK01":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/UK01.png","name":"鲁尼","country":"英格兰","level":4},"UK02":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/UK02.png","name":"杰拉德","country":"英格兰","level":3},"UK03":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/UK03.png","name":"兰帕德","country":"英格兰","level":2},"UK04":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/UK04.png","name":"威尔希尔","country":"英格兰","level":2},"UK05":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/UK05.png","name":"斯图里奇","country":"英格兰","level":2},"UK06":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/UK06.png","name":"维尔贝克","country":"英格兰","level":1},"UK08":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/UK08.png","name":"哈特","country":"英格兰","level":1},"FR03":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/FR03.png","name":"马图伊迪","country":"法国","level":1},"FR04":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/FR04.png","name":"博格巴","country":"法国","level":1},"FR07":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/FR07.png","name":"科斯切尔尼","country":"法国","level":1},"FR08":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/FR08.png","name":"洛里","country":"法国","level":1},"FR01":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/FR01.png","name":"里贝里","country":"法国","level":5},"FR02":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/FR02.png","name":"本泽马","country":"法国","level":3},"FR05":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/FR05.png","name":"埃夫拉","country":"法国","level":2},"FR06":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/FR06.png","name":"吉鲁","country":"法国","level":1},"PT04":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/PT04.png","name":"科恩特朗","country":"葡萄牙","level":1},"PT05":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/PT05.png","name":"穆蒂尼奥","country":"葡萄牙","level":1},"PT07":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/PT07.png","name":"维洛索","country":"葡萄牙","level":1},"PT01":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/PT01.png","name":"C罗","country":"葡萄牙","level":5},"PT02":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/PT02.png","name":"佩佩","country":"葡萄牙","level":3},"PT03":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/PT03.png","name":"纳尼","country":"葡萄牙","level":2},"PT06":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/PT06.png","name":"布鲁诺·阿尔维斯","country":"葡萄牙","level":1},"PT08":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/PT08.png","name":"梅雷莱斯","country":"葡萄牙","level":1},"BE05":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/BE05.png","name":"卢卡库","country":"比利时","level":1},"BE02":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/BE02.png","name":"孔帕尼","country":"比利时","level":2},"BE03":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/BE03.png","name":"费莱尼","country":"比利时","level":2},"BE01":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/BE01.png","name":"阿扎尔","country":"比利时","level":3},"BE04":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/BE04.png","name":"费尔马伦","country":"比利时","level":1},"UY03":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/UY03.png","name":"戈丁","country":"乌拉圭","level":1},"UY04":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/UY04.png","name":"迭戈·佩雷斯","country":"乌拉圭","level":1},"UY01":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/UY01.png","name":"苏亚雷斯","country":"乌拉圭","level":4},"UY02":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/UY02.png","name":"卡瓦尼","country":"乌拉圭","level":2},"UY05":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/UY05.png","name":"穆斯莱拉","country":"乌拉圭","level":1},"HR03":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/HR03.png","name":"斯尔纳","country":"克罗地亚","level":1},"HR01":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/HR01.png","name":"莫德里奇","country":"克罗地亚","level":2},"HR02":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/HR02.png","name":"曼祖基奇","country":"克罗地亚","level":3},"HR04":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/HR04.png","name":"奥利奇","country":"克罗地亚","level":1},"HR05":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/HR05.png","name":"拉基蒂奇","country":"克罗地亚","level":1},"JP03":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/JP03.png","name":"本田圭佑","country":"日本","level":1},"JP01":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/JP01.png","name":"香川真司","country":"日本","level":2},"JP02":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/JP02.png","name":"长友佑都","country":"日本","level":1},"JP04":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/JP04.png","name":"冈崎慎司","country":"日本","level":1},"JP05":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/JP05.png","name":"内田笃人","country":"日本","level":1},"KP03":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/KP03.png","name":"孙兴民","country":"韩国","level":1},"KP02":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/KP02.png","name":"朴周永","country":"韩国","level":1},"KP04":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/KP04.png","name":"金英权","country":"韩国","level":1},"KP05":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/KP05.png","name":"具滋哲","country":"韩国","level":1},"KP01":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/KP01.png","name":"奇诚庸","country":"韩国","level":1},"NL01":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/NL01.png","name":"范佩西","country":"荷兰","level":4},"NL02":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/NL02.png","name":"罗本","country":"荷兰","level":5},"NL03":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/NL03.png","name":"斯内德","country":"荷兰","level":2},"NL04":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/NL04.png","name":"亨特拉尔","country":"荷兰","level":1},"NL05":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/NL05.png","name":"德容","country":"荷兰","level":1},"NL06":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/NL06.png","name":"库伊特","country":"荷兰","level":1},"NL07":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/NL07.png","name":"范德法特","country":"荷兰","level":1},"NL08":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/NL08.png","name":"弗拉尔","country":"荷兰","level":1},"CL01":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/CL01.png","name":"比达尔","country":"智利","level":3},"CL02":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/CL02.png","name":"桑切斯","country":"智利","level":3},"CL03":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/CL03.png","name":"伊斯拉","country":"智利","level":1},"CL04":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/CL04.png","name":"费尔南德斯","country":"智利","level":1},"CL05":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/CL05.png","name":"布拉沃","country":"智利","level":1},"YX01":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/YX01.png","name":"德罗巴","country":"群英队","level":2},"YX02":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/YX02.png","name":"亚亚·图雷","country":"群英队","level":3},"YX03":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/YX03.png","name":"埃托奥","country":"群英队","level":2},"YX04":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/YX04.png","name":"米克尔","country":"群英队","level":1},"YX05":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/YX05.png","name":"埃尔南德斯","country":"群英队","level":1},"YX06":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/YX06.png","name":"法尔考","country":"群英队","level":2},"YX07":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/YX07.png","name":"哲科","country":"群英队","level":2},"YX08":{"src":"http://img4.cache.netease.com/utf8/worldcupCard/image/teams3/550x734/YX08.png","name":"利希施泰纳","country":"群英队","level":2}};
+    var url = 'http://2014.163.com/3/';
+    var loginInfo = localStorage.getItem('pp');
+    var pinfo = document.cookie.match(/P_INFO=([^;]+)/)[1].split('|');
+    var passport;
+    var myCards = [], result = [];
+
+    if ( loginInfo ) {
+        if ( pinfo[2] == 0 || pinfo[2] == 1 ) {
+            passport = pinfo[0];
+            getMyCards();
+        } else {
+            loginInfo = loginInfo.split(' ');
+            login();
+        }
+    }
+
+    function start(pp) {
+        localStorage.setItem('pp', pp);
+        logout();
+    }
+
+    function getMyCards() {
+        $.ajax({
+           url: 'http://wc.c.m.163.com/card/getMyCards.jsonp',
+           dataType: 'jsonp',
+           success: function(json) {
+               if ( json.resCode == 0 ) {
+                   $.each(json.teamList, function(_, team)  {
+                       $.each(team.cards, function(_, card)  {
+                           if ( card.total > 0 ) {
+                               myCards.push(card.pid);
+                           }
+                       });
+                   });
+               } else {
+                   myCards = [];
+               }
+               loop();
+           }
+       });
+    }
+
+    function loop() {
+        if ( myCards.length == 0 ) { // end
+            localStorage.removeItem('pp');
+            parent.logResult(result);
+            return;
+        }
+        setTimeout(function() {
+            getCardDetail(myCards.shift());
+        }, 100);
+    }
+
+    function getCardDetail(pid) {
+        $.ajax({
+           url: 'http://wc.c.m.163.com/card/getCardDetail.jsonp',
+           dataType: 'jsonp',
+           data: {
+               pid: pid,
+               _: +new Date()
+           },
+           success: function(json) {
+               result.push($.extend(json, cardInfo[pid]));
+               loop();
+           }
+       });
+    }
+
+
+
+
+    function login() {
+        $('#app-login-url').val(url);
+        $('#glogin-uname').val(loginInfo[0]);
+        $('#glogin-pwd').val(loginInfo[1]);
+        $('#form-login').submit();
+    }
+
+    function logout() {
+        location.href = 'http://reg.163.com/Logout.jsp?url=' + encodeURIComponent(url);
+    }
+</script>
+</body>
+</html>

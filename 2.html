@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="target-densitydpi=device-dpi,width=device-width" name="viewport">
+    <style type="text/css">
+        .red {
+            color: red;
+        }
+        .blue {
+            color: blue;
+        }
+    </style>
+    <title></title>
+</head>
+<body>
+<div id="top">
+    <div id="b-pps">
+        <textarea rows="4" style="width: 300px;" placeholder="每对账号<空格>密码单独一行"></textarea><br>
+        <button>确定</button>
+    </div>
+    <div id="b-filterCountry">
+        <select>
+            <option>所有</option>
+            <option>西班牙</option>
+            <option>巴西</option>
+            <option>意大利</option>
+            <option>阿根廷</option>
+            <option>荷兰</option>
+            <option>英格兰</option>
+            <option>葡萄牙</option>
+            <option>克罗地亚</option>
+            <option>群英队</option>
+            <option>德国</option>
+            <option>法国</option>
+            <option>比利时</option>
+            <option>乌拉圭</option>
+            <option>智利</option>
+            <option>日本</option>
+            <option>韩国</option>
+        </select>
+        <button>过滤球队</button>
+    </div>
+    <div id="b-filterPassport">
+        <input type="text">
+        <button>过滤账号</button>
+    </div>
+    <div><button id="clear">清空数据</button></div>
+</div>
+
+<div id="list" style="padding-top: 15px;"></div>
+<iframe style="display: none;" src="http://2014.163.com/3/" id="iframe"></iframe>
+<script type="text/javascript" src="http://img4.cache.netease.com/3g/img13/dati/zepto.min.js"></script>
+<script>
+    var wanna = ['哈维', '蒂亚戈·席尔瓦', '厄齐尔', '罗本', '佩佩', '长友佑都', '亚亚·图雷', '曼祖基奇', '奇诚庸', '比达尔', '苏亚雷斯', '阿扎尔', '皮尔洛', '布冯', '阿奎罗', '杰拉德', '里贝里'];
+
+    var iframe = $('#iframe')[0];
+    var passports, passport, allCards = JSON.parse(localStorage.getItem('acs')) || {};
+    var TMPL1 = '<tr class="<#=cl#>"><th><#=name#></th> <td><#=total#>张</td> <td><#=country#>队</td> <td>可送<#=numGive#>张</td></tr>';
+    var TMPL2 = '<tr class="<#=cl#>"><th><#=name#></th> <td><#=total#>张</td> <td>可送<#=numGive#>张</td> <td style="width: 80%;">相关账号： <#=pps#></td></tr>';
+
+    localStorage.removeItem('pp');
+    var bPps = $('#b-pps');
+    bPps.find('button').on('click', function() {
+        var val = $.trim(bPps.find('textarea').val());
+        passports = val.split('\n');
+        start();
+    });
+
+    var bfc = $('#b-filterCountry');
+    bfc.find('button').on('click', function() {
+        var val = bfc.find('select').val();
+        if ( val == '所有' ) {
+            bfc.find('option').each(function() {
+                if ( $(this).text() != '所有' ) {
+                    filterByCountry($(this).text());
+                }
+            });
+        } else {
+            filterByCountry(val);
+        }
+    });
+
+    var bfp = $('#b-filterPassport');
+    bfp.find('button').on('click', function() {
+        var val = $.trim(bfp.find('input').val());
+        if ( allCards[val] ) {
+            filterByPassport(val, allCards[val]);
+        } else {
+            alert('没有' + val + '相关卡片信息');
+        }
+    });
+
+    $('#clear').on('click', function() {
+        localStorage.removeItem('acs');
+    });
+
+    function start() {
+        if ( passports.length == 0 ) {
+            localStorage.setItem('acs', JSON.stringify(allCards)); // 记录所有卡
+            alert('所有数据整理完毕');
+            return;
+        }
+        passport = passports.shift();
+        iframe.contentWindow.start(passport);
+    }
+
+    function logResult(result) {
+        var pp = passport.split(' ')[0];
+        if ( result.length > 0 ) {
+            allCards[pp] = result;
+            filterByPassport(pp, result);
+        } else {
+            $('#list').append('<div><p>账号 ' + pp + ' 出错，可能被封了</p></div>');
+        }
+        start();
+    }
+
+    function filterByPassport(pp, data) {
+        var str = '<div><p>账号 ' + pp + ' 获得了 ' + data.length + '张卡：</p><table>';
+        $.each(data, function(_, card) {
+            var obj = {};
+            if ( $.inArray(card.name, wanna) != -1 ) {
+                obj.cl = card.numGive > 0 ? 'red' : 'blue';
+            } else {
+                obj.cl = '';
+            }
+            str += simpleParse(TMPL1, $.extend(obj, card));
+        });
+        str += '</table></div>';
+        $('#list').append(str);
+    }
+
+    function filterByCountry(country) {
+        var countryCards = {};
+        $.each(allCards, function(pp, cards) {
+            $.each(cards, function(_, card) {
+                 if ( card.country == country ) {
+                     var pid = card.pid;
+                     if ( !countryCards[pid] ) {
+                         countryCards[pid] = $.extend({pps: ''}, card);
+                     } else {
+                         countryCards[pid].total += card.total;
+                         countryCards[pid].numGive += card.numGive;
+                     }
+
+                     var cc = countryCards[pid];
+                     var sep = cc.pps ? '，' : '';
+                     cc.pps += sep + pp + '|' + card.total + '|' + card.numGive;
+                 }
+            });
+        });
+
+        var str = '', len = 0;
+        $.each(countryCards, function(_, card) {
+            var obj = {};
+            if ( $.inArray(card.name, wanna) != -1 ) {
+                obj.cl = card.numGive > 0 ? 'red' : 'blue';
+            } else {
+                obj.cl = '';
+            }
+            str += simpleParse(TMPL2, $.extend(obj, card));
+            len++;
+        });
+        str = '<div><p>' + country + ' 共 '+ len + ' 张，卡片详情： </p><table>' + str +  '</table></div>';
+        $('#list').prepend(str);
+    }
+
+    function simpleParse(tpl, values) {
+        return values ? String(tpl).replace(/<#=(\w+)#>/g, function($1, $2) {
+            return values[$2] != null ? values[$2] : $1;
+        }) : tpl;
+    }
+</script>
+</body>
+</html>
