@@ -111,7 +111,7 @@
             allCards[pp] = result;
             filterByPassport(pp, result);
         } else {
-            $('#list').append('<div><p>账号 ' + pp + ' 出错，可能被封了</p></div>');
+            $('#list').prepend('<div><p>账号 ' + pp + ' 出错，可能被封了</p></div>');
         }
         start();
     }
@@ -128,7 +128,7 @@
             str += simpleParse(TMPL1, $.extend(obj, card));
         });
         str += '</table></div>';
-        $('#list').append(str);
+        $('#list').prepend(str);
     }
 
     function filterByCountry(country) {
